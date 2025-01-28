@@ -1,5 +1,6 @@
 "use client";
 
+import { useTasks } from "@/context/taskContext";
 import { useUserContext } from "@/context/userContext";
 import { github, moon, profile } from "@/utils/Icons";
 import Link from "next/link";
@@ -7,6 +8,7 @@ import React from "react";
 
 function Header() {
   const { user } = useUserContext();
+  const { openModalAdd, activeTasks } = useTasks();
   const { name } = user;
   const userId = user._id;
 
@@ -22,7 +24,7 @@ function Header() {
         <p className="text-sm">
           {userId ? (
             <>
-              You have <span className="font-bold text-[#3aafae]">5</span>
+              You have <span className="font-bold text-[#3aafae]">{activeTasks.length}</span>
               &nbsp;active tasks
             </>
           ) : (
@@ -34,31 +36,38 @@ function Header() {
         <button
           className="px-8 py-3 bg-[#3aafae] text-white rounded-[50px]
         hover:bg-[#00A1F1] hover:text-white transition-all duration-200 ease-in-out"
+          onClick={openModalAdd}
         >
-           Create a new Task
+          Create a new Task
         </button>
         <div className="flex gap-4 items-center">
-          <Link href="https://github.com/Fahimfylo/Taskey"
+          <Link
+            href="https://github.com/Fahimfylo/Taskey"
             passHref
             target="_blank"
             rel="noopener noreferrer"
-            className="h-[40px] w-[40px] text-purple-500 rounded-full flex items-center justify-center text-lg border-2 border-[#E6E6E6]">
-                {github}
-            </Link>
-            <Link href="https://github.com/Fahimfylo/Taskey"
+            className="h-[40px] w-[40px] text-purple-500 rounded-full flex items-center justify-center text-lg border-2 border-[#E6E6E6]"
+          >
+            {github}
+          </Link>
+          <Link
+            href="https://github.com/Fahimfylo/Taskey"
             passHref
             target="_blank"
             rel="noopener noreferrer"
-            className="h-[40px] w-[40px] text-purple-500 rounded-full flex items-center justify-center text-lg border-2 border-[#E6E6E6]">
-                {moon}
-            </Link>
-            <Link href="https://github.com/Fahimfylo/Taskey"
+            className="h-[40px] w-[40px] text-purple-500 rounded-full flex items-center justify-center text-lg border-2 border-[#E6E6E6]"
+          >
+            {moon}
+          </Link>
+          <Link
+            href="https://github.com/Fahimfylo/Taskey"
             passHref
             target="_blank"
             rel="noopener noreferrer"
-            className="h-[40px] w-[40px] text-purple-500 rounded-full flex items-center justify-center text-lg border-2 border-[#E6E6E6]">
-                {profile}
-            </Link>
+            className="h-[40px] w-[40px] text-purple-500 rounded-full flex items-center justify-center text-lg border-2 border-[#E6E6E6]"
+          >
+            {profile}
+          </Link>
         </div>
       </div>
     </header>
