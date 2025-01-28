@@ -1,7 +1,9 @@
 import { useTasks } from "@/context/taskContext";
+import { item } from "@/utils/animations";
 import { edit, star, trash } from "@/utils/Icons";
 import { Task } from "@/utils/types";
 import { formatTime } from "@/utils/utilities";
+import { motion } from "framer-motion";
 import React from "react";
 
 interface TaskItemProps {
@@ -25,7 +27,8 @@ function TaskItem({ task }: TaskItemProps) {
   const { getTask, openModalEdit, deleteTask, modalMode } = useTasks();
 
   return (
-    <div className="h-[16rem] w-full px-4 py-3 flex flex-col gap-4 shadow-sm bg-[#F9F9F9] rounded-lg border-white">
+    <motion.div className="h-[16rem] w-full px-4 py-3 flex flex-col gap-4 shadow-sm bg-[#F9F9F9] rounded-lg border-white"
+    variants={item}>
       <div>
         <h4 className="font-bold text-2xl">{task.title}</h4>
         <p>{task.description}</p>
@@ -44,16 +47,20 @@ function TaskItem({ task }: TaskItemProps) {
             >
               {star}
             </button>
-            <button className="text-[#00A1F1]"
-              onClick={() =>{
-                getTask(task._id)
-                openModalEdit(task)
-              }}>{edit}</button>
+            <button
+              className="text-[#00A1F1]"
+              onClick={() => {
+                getTask(task._id);
+                openModalEdit(task);
+              }}
+            >
+              {edit}
+            </button>
             <button className="text-[#F65314]">{trash}</button>
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
