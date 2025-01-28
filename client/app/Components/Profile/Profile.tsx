@@ -8,19 +8,20 @@ import { useTasks } from "@/context/taskContext";
 
 function Profile() {
   const { user } = useUserContext();
-  const { tasks, activeTasks, completedTasks } = useTasks();
+  const { tasks, activeTasks, completedTasks, openProfileModal } = useTasks();
   return (
     <div className="m-6">
       <div
         className="px-2 py-4 flex items-center gap-3 bg-[#E6E6E6]/20 rounded-[0.8rem]
       hover:bg-[#E6E6E6]/50 transition duration-300 ease-in-out cursor-pointer border-2 border-transparent hover:border-2 hover:border-white"
+        onClick={openProfileModal}
       >
         <div>
           <Image
             src={Avatar}
             alt="avatar"
-            width={70}
-            height={70}
+            width={50}
+            height={50}
             className="rounded-full"
           />
         </div>
